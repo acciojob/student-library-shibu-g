@@ -4,6 +4,9 @@ import com.example.library.studentlibrary.models.Card;
 import com.example.library.studentlibrary.models.CardStatus;
 import com.example.library.studentlibrary.models.Student;
 import com.example.library.studentlibrary.repositories.CardRepository;
+
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,11 @@ public class CardService {
     CardRepository cardRepository3;
 
     public Card createAndReturn(Student student){
-        Card card = null;
+        Card card = new Card();
+        card.setCardStatus(CardStatus.ACTIVATED);
+        card.setCreatedOn(new Date(2020,12,30));
+        card.setStudent(student);
+        cardRepository3.save(card);
         //link student with a new card
         return card;
     }

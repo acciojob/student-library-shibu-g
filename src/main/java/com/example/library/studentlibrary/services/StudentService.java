@@ -19,26 +19,39 @@ public class StudentService {
     StudentRepository studentRepository4;
 
     public Student getDetailsByEmail(String email){
-        Student student = null;
+        Student student = studentRepository4.findByEmailId(email);
 
         return student;
     }
 
     public Student getDetailsById(int id){
-        Student student = null;
+        Student student = studentRepository4.getOne(id);
 
         return student;
     }
 
     public void createStudent(Student student){
+    	cardService4.createAndReturn(student);
+    	studentRepository4.save(student);
 
     }
 
     public void updateStudent(Student student){
-
+     Student s=studentRepository4.getOne(student.getId());
+     s.setAge(student.getAge());
+     s.setCard(student.getCard());
+     s.setCountry(student.getCountry());
+     s.setCreatedOn(student.getCreatedOn());
+     s.setEmailId(student.getEmailId());
+     s.setId(student.getId());
+     s.setName(student.getName());
+     s.setUpdatedOn(student.getUpdatedOn());
+     studentRepository4.save(s);
     }
 
     public void deleteStudent(int id){
         //Delete student and deactivate corresponding card
+    	cardService4.equals(id);
+    	studentRepository4.deleteById(id);
     }
 }
